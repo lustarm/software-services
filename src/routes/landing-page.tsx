@@ -1,40 +1,32 @@
+import NavBar from "../components/nav-bar";
+
 export default function LandingPage() {
     return (
-        <div className="relative bg-black text-white h-screen">
-            {
-            /* doesn't sit on background fix 
-            <div className="absolute inset-0 bg-no-repeat bg-center bg-cover opacity-10" 
-                style={{ backgroundImage: 'url(/path-to-your-pattern.png)' }}></div>
-            */
-            }
-            
+            <div className="relative bg-black bg-opacity-60 text-white h-screen">
+
+            {/* Background Image */}
+            <div
+                className="absolute inset-0 bg-no-repeat bg-center bg-cover opacity-10 -z-10"
+                style={{ backgroundImage: `url(/src/assets/pxfuel.jpg)` }}
+            ></div>
+
             {/* Navbar */}
-            <nav className="absolute top-0 left-0 w-full flex justify-between items-center px-10 py-4">
-                <div className="text-lg font-bold">NAME COMPANY</div>
-                <ul className="flex space-x-6">
-                    <li className="hover:underline cursor-pointer">Home</li>
-                    <li className="hover:underline cursor-pointer">Profile</li>
-                    <li className="hover:underline cursor-pointer">About Us</li>
-                    <li className="hover:underline cursor-pointer">Contacts</li>
-                    <li className="px-4 py-2 bg-white text-black font-semibold rounded cursor-pointer hover:bg-zinc-300">
-                        Sign Up
-                    </li>
-                </ul>
-            </nav>
+            <NavBar />
 
             {/* Main Content */}
-            <div className="flex flex-col items-center justify-center h-full">
+            <div className="flex flex-col items-center justify-center h-full z-10">
                 <h1 className="text-5xl font-extrabold">Software Services</h1>
-                <h2 className="mt-2 text-2xl text-gray-300">Fullstack Development</h2>
-                <p className="mt-4 max-w-md text-center text-gray-400">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-                    incididunt ut labore et dolore magna aliqua.
+                <h2 className="mt-2 text-2xl text-zinc-300">Fullstack Development</h2>
+                <p className="mt-4 max-w-md text-center text-zinc-400">
+                    Want to learn how to code, but don't know where to start?
+                    <br />
+                    Sign up today and start learning!
                 </p>
                 <div className="mt-6 space-x-4">
-                    <button className="px-6 py-2 bg-gray-700 text-white font-semibold rounded hover:bg-gray-800">
+                    <button className="px-6 py-2 bg-zinc-700 text-white font-semibold rounded hover:bg-zinc-800">
                         Sign Up
                     </button>
-                    <button className="px-6 py-2 bg-transparent border border-gray-700 text-white font-semibold rounded hover:bg-gray-700">
+                    <button className="px-6 py-2 bg-transparent border border-zinc-700 text-white font-semibold rounded hover:bg-zinc-700">
                         Login
                     </button>
                 </div>
@@ -42,3 +34,4 @@ export default function LandingPage() {
         </div>
     );
 }
+
