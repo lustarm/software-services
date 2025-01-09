@@ -2,7 +2,7 @@ import NavBar from "../components/nav-bar";
 
 export default function LandingPage() {
     return (
-            <div className="relative bg-black bg-opacity-60 text-white h-screen">
+        <div className="relative bg-black bg-opacity-60 text-white h-screen">
 
             {/* Background Image */}
             <div
