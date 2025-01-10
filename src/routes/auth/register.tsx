@@ -1,14 +1,29 @@
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom"
+
 import NavBar from "../../components/nav-bar";
 
 export default function RegisterPage() {
-    return (
-        <div className="relative bg-black bg-opacity-60 text-white h-screen">
+    const [email, setEmail] = useState("")
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
 
-            {/* Background Image */}
-            <div
-                className="absolute inset-0 bg-no-repeat bg-center bg-cover opacity-10 -z-10"
-                style={{ backgroundImage: `url(/src/assets/pxfuel.jpg)` }}
-            ></div>
+    useEffect(() => {
+        const payload = {
+            email,
+            username,
+            password,
+        }
+        fetch("http://localhost:8000/v1/register", {
+            method: "POST",
+            headers: { "Content-Type" : "application/json" },
+            body: JSON.stringify(payload),
+        }).then(response => response.json())
+    }, [])
+
+    return (
+        <div className="relative bg-cover bg-[url('/src/assets/pxfuel.jpg')]
+            bg-center text-white h-screen">
 
             {/* Navbar */}
             <NavBar />
@@ -50,16 +65,20 @@ export default function RegisterPage() {
                     </div>
 
                     {/* Submit Button */}
-                    <button className="mt-6 px-6 py-2 bg-zinc-700 text-white font-semibold rounded hover:bg-zinc-800 w-full">
+                    <button className="mt-6 px-6 py-2 bg-zinc-700
+                        text-white font-semibold rounded
+                        hover:bg-zinc-800 w-full"
+                        onClick={() => {}}
+                    >
                         Register
                     </button>
                 </form>
 
                 <p className="mt-4 text-zinc-400 text-center">
                     Already have an account?{" "}
-                    <a href="/login" className="text-white underline">
+                    <Link to="/login/" className="text-white underline">
                         Login here
-                    </a>
+                    </Link>
                 </p>
             </div>
         </div>

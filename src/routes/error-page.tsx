@@ -1,36 +1,34 @@
+import { useState, useEffect } from "react";
 import { useRouteError } from "react-router-dom";
+
 import NavBar from "../components/nav-bar";
 
 export default function ErrorPage() {
     const error = useRouteError();
-    console.error(error);
+    const [errorMessage, setErrorMessage] = useState("");
 
-    const isError = (error: unknown): error is { message: string; statusText: string } => {
-        return typeof error === 'object' && error !== null && ('message' in error || 'statusText' in error);
-    };
+    useEffect(() => {
+        if (error) {
+            // Narrow the type of error
+            if (typeof error === "object" && error !== null && "data" in error) {
+                setErrorMessage((error as { data: string }).data);
+            } else {
+                setErrorMessage("An unexpected error occurred.");
+            }
+        }
+    }, [error]);
 
     return (
-        <div className="relative h-screen bg-black bg-opacity-60
-            flex flex-col items-center justify-center text-white">
-            {/* Background Image */}
-            <div
-                className="absolute inset-0 bg-no-repeat bg-center bg-cover opacity-10 -z-10"
-                style={{ backgroundImage: `url(/src/assets/pxfuel.jpg)` }}
-            ></div>
+        <div className="relative bg-cover bg-[url('/src/assets/pxfuel.jpg')]
+            bg-center text-white h-screen flex flex-col items-center
+            justify-center">
 
             <NavBar />
 
-            {/* this looks crazy i cant lie */}
             <div className="text-3xl flex flex-col items-center justify-center text-white">
             <h1>Oops!</h1>
-                {error ? (
-                    <p>Sorry, an unexpected error has occurred.</p>
-                ) : (
-                        <p>The path you are looking for is invalid.</p>
-                    )}
-                <p>
-                    {isError(error) && <i>{error.statusText || error.message}</i>}
-                </p>
+                <p>Sorry, an error has occurred.</p>
+                <p>{errorMessage}</p>
             </div>
         </div>
     );

@@ -1,14 +1,11 @@
+import { Link } from "react-router-dom"
+
 import NavBar from "../../components/nav-bar";
 
 export default function LoginPage() {
     return (
-        <div className="relative bg-black bg-opacity-60 text-white h-screen">
-
-            {/* Background Image */}
-            <div
-                className="absolute inset-0 bg-no-repeat bg-center bg-cover opacity-10 -z-10"
-                style={{ backgroundImage: `url(/src/assets/pxfuel.jpg)` }}
-            ></div>
+        <div className="relative bg-cover bg-[url('/src/assets/pxfuel.jpg')]
+            bg-center text-white h-screen">
 
             {/* Navbar */}
             <NavBar />
@@ -38,16 +35,20 @@ export default function LoginPage() {
                     </div>
 
                     {/* Submit Button */}
-                    <button className="mt-6 px-6 py-2 bg-zinc-700 text-white font-semibold rounded hover:bg-zinc-800 w-full">
+                    <button className="mt-6 px-6 py-2 bg-zinc-700
+                        text-white font-semibold rounded
+                        hover:bg-zinc-800 w-full"
+                        onClick={() => {}}
+                    >
                         Log In
                     </button>
                 </form>
 
                 <p className="mt-4 text-zinc-400 text-center">
                     Don't have an account?{" "}
-                    <a href="/register" className="text-white underline">
+                    <Link to="/register/" className="text-white underline">
                         Register here
-                    </a>
+                    </Link>
                 </p>
             </div>
         </div>
