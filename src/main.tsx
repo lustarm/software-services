@@ -9,6 +9,7 @@ import LandingPage from './routes/landing-page'
 import ErrorPage from './routes/error-page'
 import LoginPage from './routes/auth/login'
 import RegisterPage from './routes/auth/register'
+import ProfilePage from './routes/profile/profile-page'
 
 const router = createBrowserRouter([
 	{
@@ -18,13 +19,19 @@ const router = createBrowserRouter([
 	},
     // User auth
     {
-        path: "/login",
+        path: "/login/",
         element: <LoginPage />,
         errorElement: <ErrorPage />
     },
     {
-        path: "/register",
+        path: "/register/",
         element: <RegisterPage />,
+        errorElement: <ErrorPage />
+    },
+    // Profile
+    {
+        path: "/profile/",
+        element: <ProfilePage />,
         errorElement: <ErrorPage />
     },
 ])
