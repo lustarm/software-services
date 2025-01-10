@@ -1,91 +1,55 @@
 import NavBar from "@/components/nav-bar";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import ProfileSideBar from "@/routes/profile/components/side-bar";
+import useAuthCheck from "@/util/check-auth";
+import { useEffect, useState } from "react";
 
 export default function SchedulePage() {
-    const navigate = useNavigate()
+    useAuthCheck()
 
     const [loading, setLoading] = useState(true)
 
-    let token = localStorage.getItem("Authorization")
-
     useEffect(() => {
-        if(!token) {
-            navigate("/login/")
-        }
-
         setLoading(false)
+    }, [])
 
-    }, [token])
-
-    if( loading ) {
-
-        return(
-            <div className="relative bg-black bg-opacity-60 text-white h-screen">
-            </div>
-        )
+    if(loading) {
+        return
     }
 
     return (
         <div className="relative bg-cover bg-[url('/src/assets/pxfuel.jpg')]
             bg-center backdrop-blur-sm text-white h-screen">
 
-            {/* Navbar */}
-            <NavBar />
+            <div className="h-16">
+                <NavBar />
+            </div>
 
-            {/* Main Content */}
-            <div className="flex flex-col items-center justify-center h-full z-10">
-                <h1 className="text-5xl font-extrabold">Your Schedule</h1>
-                <p className="mt-4 max-w-lg text-center text-zinc-400">
-                    Here’s your upcoming schedule. Stay organized and on top of your commitments!
-                </p>
+            <div className="flex flex-1">
+                <ProfileSideBar />
 
-                {/* Schedule Table */}
-                <div className="mt-8 w-full max-w-4xl bg-zinc-800 bg-opacity-70 rounded-lg shadow-lg">
-                    <table className="w-full text-left text-white">
-                        <thead>
-                            <tr className="bg-zinc-700">
-                                <th className="px-4 py-3 font-semibold">Date</th>
-                                <th className="px-4 py-3 font-semibold">Time</th>
-                                <th className="px-4 py-3 font-semibold">Event</th>
-                                <th className="px-4 py-3 font-semibold text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {/* Example Schedule Entries */}
-                            <tr className="border-b border-zinc-600 hover:bg-zinc-700">
-                                <td className="px-4 py-3">January 10, 2025</td>
-                                <td className="px-4 py-3">10:00 AM</td>
-                                <td className="px-4 py-3">Team Meeting</td>
-                                <td className="px-4 py-3 text-center">
-                                    <button className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700">
-                                        Remove
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr className="border-b border-zinc-600 hover:bg-zinc-700">
-                                <td className="px-4 py-3">January 12, 2025</td>
-                                <td className="px-4 py-3">3:00 PM</td>
-                                <td className="px-4 py-3">Client Presentation</td>
-                                <td className="px-4 py-3 text-center">
-                                    <button className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700">
-                                        Remove
-                                    </button>
-                                </td>
-                            </tr>
-                            {/* Add more rows dynamically as needed */}
-                        </tbody>
-                    </table>
-                </div>
+                <div className="flex-1 p-6">
+                    {/* Profile Header */}
+                    <div className="flex items-center space-x-4 mb-5
+                        bg-zinc-800 p-5 rounded-md">
+                        <div className="w-16 h-16 bg-zinc-700 rounded-full"></div>
+                        <div>
+                            { /* == if shows up when loading it will just be ... */ }
+                            <div className="font-bold text-lg">User Name</div>
+                            <div className="text-sm text-zinc-400">Role: User</div>
+                        </div>
+                    </div>
 
-                {/* Add Event Button */}
-                <div className="mt-6">
-                    <button className="px-6 py-2 bg-zinc-700 text-white font-semibold rounded hover:bg-zinc-800">
-                        Add Event
-                    </button>
+                    {/* Main Content Panels */}
+                    <div className="grid grid-cols-3 gap-4">
+                        <div className="bg-zinc-800 p-5 rounded-md h-40"></div>
+                        <div className="bg-zinc-800 p-5 rounded-md h-40"></div>
+                        <div className="bg-zinc-800 p-5 rounded-md h-40"></div>
+                    </div>
+
+                    <div className="mt-5 bg-zinc-800 p-5 rounded-md h-60"></div>
                 </div>
             </div>
         </div>
-    );
+    )
 }
 
