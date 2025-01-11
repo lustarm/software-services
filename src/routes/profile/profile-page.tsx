@@ -3,13 +3,17 @@ import ProfileSideBar from "@/routes/profile/components/side-bar";
 import useAuthCheck from "@/util/check-auth";
 import { useEffect, useState } from "react";
 
-export default function SchedulePage() {
+export default function ProfilePage() {
     useAuthCheck()
 
     const [loading, setLoading] = useState(true)
 
+    const [username, setUsername] = useState("")
+    const [email, setEmail] = useState("")
+
     useEffect(() => {
         setLoading(false)
+        // Get user info
     }, [])
 
     if(loading) {
