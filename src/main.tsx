@@ -16,6 +16,7 @@ import RegisterPage from './routes/auth/register'
 // Profile
 import ProfilePage from './routes/profile/profile-page'
 import ProfileSchedulePage from './routes/profile/profile-schedule'
+import ProfileCodeEditor from './routes/profile/profile-code'
 
 const router = createBrowserRouter([
 	{
@@ -43,6 +44,11 @@ const router = createBrowserRouter([
     {
         path: "/profile/schedule",
         element: <ProfileSchedulePage />,
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: "/profile/codeeditor",
+        element: <ProfileCodeEditor />,
         errorElement: <ErrorPage />,
     },
 ])

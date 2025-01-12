@@ -10,14 +10,41 @@ export default function ProfilePage() {
 
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
+    const [role, setRole] = useState("")
+
+    interface lesson {
+        id: Number
+        name: string
+        complete: boolean
+        description: string
+    }
+
+    const [lessons, setLessons] = useState([
+        { id: 1, complete: false, name: 'Lesson 1', description: "hello world"},
+        { id: 2, complete: true, name: 'Lesson 2', description: "less 2 hello world"},
+    ]);
+
 
     useEffect(() => {
         setLoading(false)
         // Get user info
+        // Set lesson info
     }, [])
 
     if(loading) {
         return
+    }
+
+    const toggleLessonComplete = (id: Number) => {
+        setLessons((prevLessons) =>
+            prevLessons.map((lesson) =>
+                lesson.id === id ? { ...lesson, complete: !lesson.complete } : lesson
+            )
+        );
+    };
+
+    function deleteLesson (lesson: lesson) {
+        setLessons(lessons.filter(e => e !== lesson))
     }
 
     return (
@@ -38,14 +65,34 @@ export default function ProfilePage() {
                         <div className="w-16 h-16 bg-zinc-700 rounded-full"></div>
                         <div>
                             { /* == if shows up when loading it will just be ... */ }
-                            <div className="font-bold text-lg">User Name</div>
-                            <div className="text-sm text-zinc-400">Role: User</div>
+                            <div className="font-bold text-lg">{username}</div>
+                            <div className="text-sm text-zinc-400">Role: {role}</div>
                         </div>
                     </div>
 
                     {/* Main Content Panels */}
                     <div className="grid grid-cols-3 gap-4">
-                        <div className="bg-zinc-800 p-5 rounded-md h-40"></div>
+                        <div className="bg-zinc-800 p-5 rounded-md h-40 overflow-auto">
+                            <h1 className="font-semibold text-2xl">Lessons</h1>
+                            {
+                                lessons.map((lesson) =>
+                                    <div className="flex flex-row py-2 space-x-1">
+                                        <input id="default-checkbox" type="checkbox" value="" 
+                                        checked={lesson.complete}
+                                        onClick={() => toggleLessonComplete}
+                                        className=" text-blue-600 bg-gray-100 
+                                        border-gray-300 rounded dark:ring-offset-gray-800 
+                                        dark:bg-gray-700 dark:border-gray-600"></input>
+                                        <a>
+                                            {lesson.name}
+                                        </a>
+                                        <button onClick={() => deleteLesson(lesson)}>
+                                            delete
+                                        </button>
+                                    </div>
+                                )
+                            }
+                        </div>
                         <div className="bg-zinc-800 p-5 rounded-md h-40"></div>
                         <div className="bg-zinc-800 p-5 rounded-md h-40"></div>
                     </div>

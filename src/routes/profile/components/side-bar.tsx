@@ -29,6 +29,16 @@ export default function ProfileSideBar() {
                         Schedule
                     </Link>
                 </li>
+                <li className="rounded-md overflow-hidden">
+                    <Link
+                        to="/profile/codeeditor/"
+                        className={`block p-3 hover:bg-zinc-700 rounded-md
+                        transition
+                        ${isActive("/profile/codeeditor/") ? 'bg-zinc-500' : 'bg-zinc-800'}`}
+                    >
+                        Code Editor
+                    </Link>
+                </li>
             </ul>
         </div>
     );

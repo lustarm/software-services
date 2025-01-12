@@ -15,11 +15,12 @@ const VERSION = "v1"
 
 func main() {
 	router := mux.NewRouter()
+
 	router.HandleFunc("/"+VERSION+"/register", users.CreateUser).Methods("POST")
 	router.HandleFunc("/"+VERSION+"/login", users.CheckUser).Methods("POST")
 	router.HandleFunc("/"+VERSION+"/verify", users.VerifyToken).Methods("POST")
 	router.HandleFunc("/"+VERSION+"/getUserCloset", users.GetUserCloset).Methods("POST")
-    router.HandleFunc("/"+VERSION+"/getUserData", users.GetUserData).Methods("POST")
+	router.HandleFunc("/"+VERSION+"/getUserData", users.GetUserData).Methods("POST")
 
 	// Cors
 	c := cors.New(cors.Options{
