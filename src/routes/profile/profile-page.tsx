@@ -22,8 +22,7 @@ export default function ProfilePage() {
     const [lessons, setLessons] = useState([
         { id: 1, complete: false, name: 'Lesson 1', description: "hello world"},
         { id: 2, complete: true, name: 'Lesson 2', description: "less 2 hello world"},
-    ]);
-
+    ])
 
     useEffect(() => {
         setLoading(false)
@@ -79,7 +78,7 @@ export default function ProfilePage() {
                                     <div className="flex flex-row py-2 space-x-1">
                                         <input id="default-checkbox" type="checkbox" value="" 
                                         checked={lesson.complete}
-                                        onClick={() => toggleLessonComplete}
+                                        onChange={() => toggleLessonComplete(lesson.id)}
                                         className=" text-blue-600 bg-gray-100 
                                         border-gray-300 rounded dark:ring-offset-gray-800 
                                         dark:bg-gray-700 dark:border-gray-600"></input>
