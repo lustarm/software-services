@@ -39,6 +39,15 @@ export default function ProfileSideBar() {
                         Code Editor
                     </Link>
                 </li>
+                <li className="rounded-md overflow-hidden">
+                    <button
+                        onClick={() => localStorage.removeItem("Authorization")}
+                        className="block p-3 hover:bg-zinc-700 rounded-md
+                        transition"
+                    >
+                        Logout
+                    </button>
+                </li>
             </ul>
         </div>
     );
