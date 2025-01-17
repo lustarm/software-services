@@ -1,7 +1,5 @@
 package users
 
-import "backend/src/modules/item"
-
 // get from DB
 // Obv were not going to grab all of them just grab them as we go
 var users []User
@@ -24,14 +22,6 @@ type CheckUserRequest struct {
 	Password string `json:"password"`
 }
 
-// closet.go
-type UserCloset struct {
-	Items []item.Item `json:"userItems"`
-}
-
-type GetUserClosetRequest struct {
-	Username string `json:"username"`
-}
 
 // data.go
 type GetUserDataRequest struct {

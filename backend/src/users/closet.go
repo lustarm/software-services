@@ -2,19 +2,18 @@ package users
 
 import (
 	"backend/src/util"
+    "backend/src/modules/item"
 	"encoding/json"
 	"net/http"
-	"time"
 )
 
-// Item structure.
-type Item struct {
-	OwnerHash    string    `json:"ownerHash"`       // Owner's hashed user ID
-	ID           uint64    `json:"itemID"`          // Item ID
-	Name         string    `json:"itemName"`        // Item name
-	Description  string    `json:"itemDescription"` // Item description
-	CreationDate time.Time `json:"creationDate"`    // Creation date
-	Price        int       `json:"price"`           // Price in some unit
+// closet.go
+type UserCloset struct {
+	Items []item.Item `json:"userItems"`
+}
+
+type GetUserClosetRequest struct {
+	Username string `json:"username"`
 }
 
 // Mock user validation function.

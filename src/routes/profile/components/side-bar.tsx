@@ -40,13 +40,14 @@ export default function ProfileSideBar() {
                     </Link>
                 </li>
                 <li className="rounded-md overflow-hidden">
-                    <button
+                    <Link
+                        to="/"
                         onClick={() => localStorage.removeItem("Authorization")}
-                        className="block p-3 hover:bg-zinc-700 rounded-md
-                        transition"
+                        className="block p-3 bg-zinc-800 hover:bg-zinc-700
+                        rounded-md transition"
                     >
                         Logout
-                    </button>
+                    </Link>
                 </li>
             </ul>
         </div>
