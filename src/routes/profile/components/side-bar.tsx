@@ -4,6 +4,7 @@ export default function ProfileSideBar() {
     const location = useLocation()
 
     const isActive = (path: string) =>
+        // literally complicated if profile/ just rmv the /
         location.pathname.replace(/\/+$/, '') === path.replace(/\/+$/, '')
 
     return (
