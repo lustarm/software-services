@@ -61,7 +61,7 @@ export default function RegisterPage() {
             return;
         }
 
-        const payload = { email, username, password };
+        const payload = { role: "Basic", email, username, password };
 
         try {
             const resp = await fetch("http://localhost:8000/v1/register", {
@@ -71,23 +71,23 @@ export default function RegisterPage() {
             });
 
             if (!resp.ok) {
-                const errdata = await resp.json();
-                setIsError(true);
-                setErrorMessage(errdata.message || "An error occurred.");
-                return;
+                const errdata = await resp.json()
+                setIsError(true)
+                setErrorMessage(errdata.message || "An error occurred.")
+                return
             }
 
-            const data = await resp.json();
-            localStorage.setItem("Authorization", data.message);
-            navigate("/profile/");
+            const data = await resp.json()
+            localStorage.setItem("Authorization", data.message)
+            navigate("/profile/")
         } catch (error) {
-            console.error(error);
-            setIsError(true);
+            console.error(error)
+            setIsError(true)
             setErrorMessage(
                 "An unknown error has occurred. Please try again later."
-            );
+            )
         }
-    };
+    }
 
     return (
         <div
@@ -141,7 +141,8 @@ export default function RegisterPage() {
                         </p>
                     )}
                     <button
-                        className="mt-6 px-6 py-2 bg-zinc-700 text-white font-semibold rounded hover:bg-zinc-800 w-full"
+                        className="mt-6 px-6 py-2 bg-zinc-700 text-white
+                        font-semibold rounded hover:bg-zinc-800 w-full"
                         onClick={handleRegister}
                     >
                         Register

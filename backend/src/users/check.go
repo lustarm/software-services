@@ -9,6 +9,11 @@ import (
 	"strconv"
 )
 
+type CheckUserRequest struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
 // Updated CheckUser function with detailed error response
 func CheckUser(w http.ResponseWriter, r *http.Request) {
 	var credentials CheckUserRequest

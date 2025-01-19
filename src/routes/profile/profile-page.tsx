@@ -1,6 +1,5 @@
 import NavBar from "@/components/nav-bar";
 import ProfileSideBar from "@/routes/profile/components/side-bar";
-import useAuthCheck from "@/util/check-auth";
 import { useEffect, useState } from "react";
 
 // Test query client
@@ -9,46 +8,32 @@ import {
     QueryClientProvider,
     useQuery,
 } from '@tanstack/react-query'
+import { useNavigate } from "react-router-dom";
 
 const queryClient = new QueryClient()
+
+interface lesson {
+    id: Number
+    name: string
+    complete: boolean
+    description: string
+}
 
 export default function ProfilePage() {
     return (
         <QueryClientProvider client={queryClient}>
-            <Test />
+            <ProfilePageQuery />
         </QueryClientProvider>
     )
 }
 
-function Test() {
-    const sid = localStorage.getItem("Authorization")
-
-    const payload = { sessionID: sid};
-
-    const { isPending, error, data } = useQuery({
-        queryKey: ['data'],
-        queryFn: () =>
-            fetch('http://localhost:8000/v1/getUserData', {
-                method: 'POST',
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload),
-            }).then((res) => res.json(),),
-    })
-
-    interface lesson {
-        id: Number
-        name: string
-        complete: boolean
-        description: string
-    }
+function ProfilePageQuery() {
+    const navigate = useNavigate()
 
     const [lessons, setLessons] = useState([
         { id: 1, complete: false, name: 'Lesson 1', description: "hello world" },
         { id: 2, complete: true, name: 'Lesson 2', description: "less 2 hello world" },
     ])
-
-    if (isPending) return
-    if (error) return(<h1>error</h1>)
 
     const toggleLessonComplete = (id: Number) => {
         setLessons((prevLessons) =>
@@ -61,6 +46,30 @@ function Test() {
     function deleteLesson(lesson: lesson) {
         setLessons(lessons.filter(e => e !== lesson))
     }
+
+    const sid = localStorage.getItem("Authorization")
+
+    useEffect(() => {
+        if (!sid) navigate("/login")
+    }, [])
+
+    const { isPending, error, data } = useQuery({
+        queryKey: ['data'],
+        queryFn: () =>
+            fetch('http://localhost:8000/v1/getUserData', {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ sessionID: sid }),
+            }).then((res) => res.json(),),
+    })
+
+
+    if (isPending)
+        return
+    if (error)
+        return (<h1>error : {error.message}</h1>)
+    if (data.error)
+        return
 
     return (
         <div className="relative bg-cover bg-[url('/src/assets/pxfuel.jpg')]
@@ -79,9 +88,14 @@ function Test() {
                         bg-zinc-800 p-5 rounded-md">
                         <div className="w-16 h-16 bg-zinc-700 rounded-full"></div>
                         <div>
-                            { /* == if shows up when loading it will just be ... */}
-                            <div className="font-bold text-lg">{data.username}</div>
-                            <div className="text-sm text-zinc-400">Role: {data.role}</div>
+                            {data.data &&
+                                <div className="font-bold text-lg">
+                                    {data.data.username}</div>
+                            }
+                            {data.data &&
+                                <div className="text-sm text-zinc-400">
+                                    Role: {data.data.role}</div>
+                            }
                         </div>
                     </div>
 
@@ -91,7 +105,7 @@ function Test() {
                             <h1 className="font-semibold text-2xl">Lessons</h1>
                             {
                                 lessons.map((lesson) =>
-                                    <div className="flex flex-row py-2 space-x-1">
+                                    <div key={lesson.id} className="flex flex-row py-2 space-x-1">
                                         <input id="default-checkbox" type="checkbox" value=""
                                             checked={lesson.complete}
                                             onChange={() => toggleLessonComplete(lesson.id)}

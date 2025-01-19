@@ -7,6 +7,11 @@ import (
 	"net/http"
 )
 
+// data.go
+type GetUserDataRequest struct {
+	SessionID string `json:"sessionID"`
+}
+
 func GetUserData(w http.ResponseWriter, r *http.Request) {
 	var request GetUserDataRequest
 	err := json.NewDecoder(r.Body).Decode(&request)
