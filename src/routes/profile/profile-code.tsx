@@ -6,9 +6,7 @@ export default function ProfileCodeEditor() {
         <div className="relative bg-cover bg-[url('/src/assets/pxfuel.jpg')]
             bg-center backdrop-blur-sm h-screen">
 
-            <div className="h-16">
-                <NavBar />
-            </div>
+            <NavBar />
             <div className="flex flex-1">
                 <ProfileSideBar />
 
